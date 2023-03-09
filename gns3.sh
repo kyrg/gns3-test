@@ -12,12 +12,12 @@ while [ $intertube -ne 1 ]; do
         ping -c 5 $gw
         if [ $? -eq  0 ]; then
                 echo "ping to gateway success";
-                echo "ping to gateway  success" >> test.txt;
+                echo "ping GATEWAY SUCCESS" >> test.txt;
 #                say success
                 intertube=1;
         else
                 echo "ping to gateway  failed"
-                echo "ping to gateway  failed" >> test.txt
+                echo "ping GATEWAY FAILED" >> test.txt
 
 
 fi
@@ -29,12 +29,12 @@ while [ $intertube -ne 1 ]; do
         ping -c 5 8.8.8.8
         if [ $? -eq  0 ]; then
                 echo "ping to 8.8.8.8 success";
-                echo "ping to 8.8.8.8 success" >> test.txt;
+                echo "ping GOOGLE SUCCESS" >> test.txt;
 #                say success
                 intertube=1;
         else
                 echo "ping to 8.8.8.8 failed"
-                echo "ping to 8.8.8.8 failed" >> test.txt
+                echo "ping GOOGLE FAILED" >> test.txt
         fi
 done
 
