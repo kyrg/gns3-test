@@ -29,7 +29,8 @@ intertube=0
 
 echo "begin ping to 8.8.8.8"
 while [ $intertube -ne 1 ]; do
-        ping -c 5 8.8.8.8
+        line=$(ping -c 5  8.8.8.8  | tail -n 1)
+       # ping -c 5 8.8.8.8
         if [ $? -eq  0 ]; then
                 echo "ping to 8.8.8.8 success";
                 echo "ping GOOGLE SUCCESS" >> test.txt;
