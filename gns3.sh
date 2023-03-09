@@ -15,12 +15,11 @@ while [ $intertube -ne 1 ]; do
         line=$(ping -c 5 $gw  | tail -n 1)
         if [ $? -eq  0 ]; then
                 echo "ping to gateway success";
-                echo "ping GATEWAY SUCCESS" >> test.txt;
-#                say success
+                echo "ping GATEWAY SUCCESS" >> $file
                 intertube=1;
         else
                 echo "ping to gateway  failed"
-                echo "ping GATEWAY FAILED" >> test.txt
+                echo "ping GATEWAY FAILED" >> $file
 
 
 fi
@@ -33,12 +32,12 @@ while [ $intertube -ne 1 ]; do
        # ping -c 5 8.8.8.8
         if [ $? -eq  0 ]; then
                 echo "ping to 8.8.8.8 success";
-                echo "ping GOOGLE SUCCESS" >> test.txt;
+                echo "ping GOOGLE SUCCESS" >> $file
 #                say success
                 intertube=1;
         else
                 echo "ping to 8.8.8.8 failed"
-                echo "ping GOOGLE FAILED" >> test.txt
+                echo "ping GOOGLE FAILED" >> $file
         fi
 done
 
@@ -49,10 +48,10 @@ trace=$(echo $line | awk '{ print $2 }')
 
 if [ $trace == "8.8.8.8"  ]; then
 echo "you reach 8.8.8.8 in $hop hops"
-echo "traceroute SUCCESS " >> test.txt
+echo "traceroute SUCCESS " >> $file
 else
 echo "destiantion 8.8.8.8 not reach"
-echo "traceroute FAILED" >> test.txt
+echo "traceroute FAILED" >> $file
 fi
 
 echo "Checking Mikrotik Router"
