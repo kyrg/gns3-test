@@ -6,7 +6,6 @@ echo "your ip address: $ip and your gateway: $gw"
 ip2=$(echo $ip | cut -d '.' -f1-3)
 mitroo=$(echo "${ip2//.}")
 file="$mitroo"".txt"
-
 echo -e $mitroo '\t' $ip '\t' $gw  > $file
 
 echo "begin ping to gateway"
