@@ -58,7 +58,7 @@ fi
 echo "Checking Mikrotik Router"
 line=$(ssh -o StrictHostKeyChecking=accept-new -t admin@107.11.13.1 '/ip/dhcp-server/export; quit;' | grep  "$gw")
 echo $line
-echo $line | tee >(sed $'s/\033[[][^A-Za-z]*m//g' >> $file
+#echo $line >> $file
 
 if [ -z "$line" ]; then
 message="DHCP SERVER FAILED"
