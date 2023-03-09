@@ -5,7 +5,7 @@ gw=$(ip r | grep "default" | awk '{ print $3}')
 echo "your ip address: $ip and your gateway: $gw"
 
 file=$(echo "${ip//.}").txt
-
+rm file
 echo -e $ip '\t' $gw  > $file
 
 echo "begin ping to gateway"
