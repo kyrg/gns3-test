@@ -1,17 +1,19 @@
 #!/bin/bash
-intertube=0
+
 
 ip=$(sudo ifconfig | sed -En 's/127.0.0.1//;s/.*inet (addr:)?(([0-9]*\.){3}[0-9]*).*/\2/p')
 gw=$(ip r | grep "default" | awk '{ print $3}')
-echo "your ip address: $ip and your gateway $gw"
+echo "your ip address: $ip and your gateway: $gw"
 
 file=$(echo "${ip//.}").txt
 
-echo -e $ip '\t' $gw  > test.txt
+echo -e $ip '\t' $gw  > $file
 
 echo "begin ping to gateway"
+intertube=0
 while [ $intertube -ne 1 ]; do
-        ping -c 5 $gw
+        #ping -c 5 $gw        
+        line=$(ping -c 5 $gw  | tail -n 1)
         if [ $? -eq  0 ]; then
                 echo "ping to gateway success";
                 echo "ping GATEWAY SUCCESS" >> test.txt;
