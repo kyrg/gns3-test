@@ -3,10 +3,10 @@
 ip=$(sudo ifconfig | sed -En 's/127.0.0.1//;s/.*inet (addr:)?(([0-9]*\.){3}[0-9]*).*/\2/p')
 gw=$(ip r | grep "default" | awk '{ print $3}')
 echo "your ip address: $ip and your gateway: $gw"
+mitroo=$(echo $ip | cut -d '.' -f1-3)
+file=$(echo "${mitroo//.}").txt
 
-file=$(echo "${ip//.}").txt
-
-echo -e $ip '\t' $gw  > $file
+echo -e $mitroo '\t' $ip '\t' $gw  > $file
 
 echo "begin ping to gateway"
 intertube=0
@@ -57,6 +57,7 @@ fi
 echo "Checking Mikrotik Router"
 line=$(ssh -o StrictHostKeyChecking=accept-new -t admin@107.11.13.1 '/ip/dhcp-server/export; quit;' | grep  "$gw")
 echo $line
+echo $line >> $file
 
 if [ -z "$line" ]; then
 message="DHCP SERVER FAILED"
