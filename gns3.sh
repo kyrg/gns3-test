@@ -13,35 +13,30 @@ intertube=0
 while [ $intertube -ne 1 ]; do  
         line=$(ping -c 5 $gw  | tail -n 1)
         if [ $? -eq  0 ]; then
-        message="ping to 8.8.8.8 SUCCESS"
-                        echo "$message
-                 echo "$message >> $file                
-                 
+                message="ping to 8.8.8.8 SUCCESS"
+                echo "$message
+                echo "$message >> $file                
                 intertube=1;
-        else
-        
-        message="ping to 8.8.8.8 FAILED"
-                        echo "$message
-                 echo "$message >> $file
-        
+        else 
+                message="ping to 8.8.8.8 FAILED"
+                echo "$message
+                echo "$message >> $file        
 fi
 done
 intertube=0
-
 echo "begin ping to 8.8.8.8"
 while [ $intertube -ne 1 ]; do
         line=$(ping -c 5  8.8.8.8  | tail -n 1)
        # ping -c 5 8.8.8.8
         if [ $? -eq  0 ]; then
-        message="ping to 8.8.8.8 success"
+                message="ping to 8.8.8.8 SUCCESS"
                 echo "$message
-                 echo "$message >> $file
-
+                echo "$message >> $file
                 intertube=1;
        else
-                message="ping to 8.8.8.8 failed"
+                message="ping to 8.8.8.8 FAILED"
                 echo "$message
-                 echo "$message >> $file
+                echo "$message >> $file
         fi
 done
 
@@ -72,7 +67,6 @@ echo $message
 echo $message>> $file
 
 fi
-
 
 #ssh -o StrictHostKeyChecking=accept-new -t admin@107.11.13.1 '/ip/dhcp-server/export; delay 1; /ip/address/print; delay 1; /ip/route/print; delay 1; /ip/dhcp-client/print; delay 1; quit' | tee >(sed $'s/\033[[][^A-Za-z]*m//g' >> $file) 2>&1 
 echo "continue"
