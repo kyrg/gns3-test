@@ -5,6 +5,8 @@ ip=$(sudo ifconfig | sed -En 's/127.0.0.1//;s/.*inet (addr:)?(([0-9]*\.){3}[0-9]
 gw=$(ip r | grep "default" | awk '{ print $3}')
 echo "your ip address: $ip and your gateway $gw"
 
+file=$(echo "${ip//.}").txt
+
 echo -e $ip '\t' $gw  > test.txt
 
 echo "begin ping to gateway"
