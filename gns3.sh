@@ -13,12 +13,12 @@ intertube=0
 while [ $intertube -ne 1 ]; do  
         line=$(ping -c 5 $gw  | tail -n 1)
         if [ $? -eq  0 ]; then
-                message="ping to 8.8.8.8 SUCCESS"
+                message="ping to GW SUCCESS"
                 echo "$message
                 echo "$message >> $file                
                 intertube=1;
         else 
-                message="ping to 8.8.8.8 FAILED"
+                message="ping to GW FAILED"
                 echo "$message
                 echo "$message >> $file        
 fi
