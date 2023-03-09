@@ -3,8 +3,9 @@
 ip=$(sudo ifconfig | sed -En 's/127.0.0.1//;s/.*inet (addr:)?(([0-9]*\.){3}[0-9]*).*/\2/p')
 gw=$(ip r | grep "default" | awk '{ print $3}')
 echo "your ip address: $ip and your gateway: $gw"
-mitroo=$(echo $ip | cut -d '.' -f1-3)
-file=$(echo "${mitroo//.}").txt
+ip2=$(echo $ip | cut -d '.' -f1-3)
+mitroo=$(echo "${mitroo//.}")
+file="$mitroo"".txt"
 
 echo -e $mitroo '\t' $ip '\t' $gw  > $file
 
