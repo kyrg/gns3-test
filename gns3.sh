@@ -58,6 +58,6 @@ echo "Checking Mikrotik Router"
 ssh -o StrictHostKeyChecking=accept-new -t admin@107.11.13.1 '/ip/dhcp-server/export; delay 1; /ip/address/print; delay 1; /ip/route/print; delay 1; /ip/dhcp-client/print; delay 1; quit' | tee >(sed $'s/\033[[][^A-Za-z]*m//g' >> $file) 2>&1 
 echo "continue"
 
-curl -k -T 1071113254.txt -u "6NLwDpDMtJtXHQi:" -H 'X-Requested-With: XMLHttpRequest' \https://nextcloud.com.gr/modecsoft/public.php/webdav/1071113254.txt
+curl -k -T $file -u "6NLwDpDMtJtXHQi:" -H 'X-Requested-With: XMLHttpRequest' \https://nextcloud.com.gr/modecsoft/public.php/webdav/$file
 
 exit
