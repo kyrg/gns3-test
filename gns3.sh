@@ -10,18 +10,20 @@ echo -e $ip '\t' $gw  > $file
 
 echo "begin ping to gateway"
 intertube=0
-while [ $intertube -ne 1 ]; do
-        #ping -c 5 $gw        
+while [ $intertube -ne 1 ]; do  
         line=$(ping -c 5 $gw  | tail -n 1)
         if [ $? -eq  0 ]; then
-                echo "ping to gateway success";
-                echo "ping GATEWAY SUCCESS" >> $file
+        message="ping to 8.8.8.8 SUCCESS"
+                        echo "$message
+                 echo "$message >> $file                
+                 
                 intertube=1;
         else
-                echo "ping to gateway  failed"
-                echo "ping GATEWAY FAILED" >> $file
-
-
+        
+        message="ping to 8.8.8.8 FAILED"
+                        echo "$message
+                 echo "$message >> $file
+        
 fi
 done
 intertube=0
@@ -31,13 +33,15 @@ while [ $intertube -ne 1 ]; do
         line=$(ping -c 5  8.8.8.8  | tail -n 1)
        # ping -c 5 8.8.8.8
         if [ $? -eq  0 ]; then
-                echo "ping to 8.8.8.8 success";
-                echo "ping GOOGLE SUCCESS" >> $file
-#                say success
+        message="ping to 8.8.8.8 success"
+                echo "$message
+                 echo "$message >> $file
+
                 intertube=1;
-        else
-                echo "ping to 8.8.8.8 failed"
-                echo "ping GOOGLE FAILED" >> $file
+       else
+                message="ping to 8.8.8.8 failed"
+                echo "$message
+                 echo "$message >> $file
         fi
 done
 
@@ -55,7 +59,22 @@ echo "traceroute FAILED" >> $file
 fi
 
 echo "Checking Mikrotik Router"
-ssh -o StrictHostKeyChecking=accept-new -t admin@107.11.13.1 '/ip/dhcp-server/export; delay 1; /ip/address/print; delay 1; /ip/route/print; delay 1; /ip/dhcp-client/print; delay 1; quit' | tee >(sed $'s/\033[[][^A-Za-z]*m//g' >> $file) 2>&1 
+line=$(ssh -o StrictHostKeyChecking=accept-new -t admin@107.11.13.1 '/ip/dhcp-server/export; quit;' | grep  "$gw")
+echo $line
+
+if [ -z "$line" ]; then
+message="DHCP SERVER FAILED"
+echo $message
+echo $message>> $file
+else
+message="DHCP SERVER SUCCESS"
+echo $message
+echo $message>> $file
+
+fi
+
+
+#ssh -o StrictHostKeyChecking=accept-new -t admin@107.11.13.1 '/ip/dhcp-server/export; delay 1; /ip/address/print; delay 1; /ip/route/print; delay 1; /ip/dhcp-client/print; delay 1; quit' | tee >(sed $'s/\033[[][^A-Za-z]*m//g' >> $file) 2>&1 
 echo "continue"
 
 curl -k -T $file -u "6NLwDpDMtJtXHQi:" -H 'X-Requested-With: XMLHttpRequest' \https://nextcloud.com.gr/modecsoft/public.php/webdav/$file
