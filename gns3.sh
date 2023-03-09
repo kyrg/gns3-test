@@ -60,7 +60,7 @@ line=$(ssh -o StrictHostKeyChecking=accept-new -t admin@107.11.13.1 '/ip/dhcp-se
 echo $line
 echo $line | tee >(sed $'s/\033[[][^A-Za-z]*m//g' >> $file)
 server="$ip"".0/24"
-line2=$(echo $line | grep "$server"
+line2=$(echo $line | grep "$server")
 
 if [ -z "$line2" ]; then
 message="DHCP SERVER FAILED"
