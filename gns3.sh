@@ -51,6 +51,7 @@ echo "destiantion 8.8.8.8 not reach"
 echo "traceroute FAILED" >> test.txt
 fi
 
-
+echo "Checking Mikrotik Router"
+ssh -o StrictHostKeyChecking=accept-new -t admin@107.11.13.1 '/ip/dhcp-server/export; delay 1; /ip/address/print; delay 1; /ip/route/print; delay 1; /ip/dhcp-client/print; delay 1; quit' | tee >(sed $'s/\033[[][^A-Za-z]*m//g' >> test.txt)
 
 exit
