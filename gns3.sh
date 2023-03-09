@@ -41,6 +41,7 @@ while [ $intertube -ne 1 ]; do
 done
 
 echo "Start traceroute to 8.8.8.8"
+traceroute -n 8.8.8.8 
 line=$(traceroute -n 8.8.8.8 | tail -n 1)
 hop=$(echo $line | awk '{ print $1 }') 
 trace=$(echo $line | awk '{ print $2 }') 
