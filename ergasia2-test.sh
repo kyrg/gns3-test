@@ -10,8 +10,8 @@ echo -e $mitroo'\t'$ip'\t'$gw  > $file
 
 echo "Checking Gateway"
 gw2="$ip2"".1"
-echo $gw2
-
+#echo $gw2
+gw=105.34.34.1
 if [ $gw2 == $gw ]; then
                 message="GW_CORRECT"
                 echo $message
@@ -22,8 +22,6 @@ else
                 echo $message >> $file
 
 fi
-
-
 
 echo "begin ping to gateway"
 intertube=0
@@ -64,10 +62,10 @@ hop=$(echo $line | awk '{ print $1 }')
 trace=$(echo $line | awk '{ print $2 }') 
 
 if [ $trace == "8.8.8.8"  ]; then
-echo "you reach 8.8.8.8 in $hop hops"
-echo "traceroute_SUCCESS " >> $file
+echo "traceroute_SUCCESS: you reach 8.8.8.8 in $hop hops"
+echo "traceroute_SUCCESS" >> $file
 else
-echo "destiantion 8.8.8.8 not reach"
+echo "traceroute_FAILED: destiantion 8.8.8.8 not reach"
 echo "traceroute_FAILED" >> $file
 fi
 
@@ -79,10 +77,10 @@ line=$(echo $line | tee >(sed $'s/\033[[][^A-Za-z]*m//g'))
 #echo $line >> $file
 echo $line | tee >(sed $'s/\033[[][^A-Za-z]*m//g' >> $file)
 
-server="$ip2"".0/24"
-echo $server
+#server="$ip2"".0/24"
+#echo $server
 line2=$(echo $line | grep "$server")
-echo $line2
+#echo $line2
 if [ -z "$line2" ]; then
 message="DHCP_SERVER_FAILED"
 echo $message
