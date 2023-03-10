@@ -8,8 +8,8 @@ mitroo=$(echo "${ip2//.}")
 file="$mitroo"".txt"
 echo -e $mitroo'\t'$ip'\t'$gw  > $file
 
-echo "Checking Gateway"
-gw2="$ip2"".1"
+echo -n "Checking Gateway:  "
+#gw2="$ip2"".1"
 #echo $gw2
 gw=105.34.34.1
 if [ $gw2 == $gw ]; then
@@ -23,7 +23,7 @@ else
 
 fi
 
-echo "begin ping to gateway"
+echo -n "begin ping to gateway:  "
 intertube=0
 while [ $intertube -ne 1 ]; do  
         line=$(ping -c 5 $gw  | tail -n 1)
@@ -39,7 +39,7 @@ while [ $intertube -ne 1 ]; do
 fi
 done
 intertube=0
-echo "begin ping to 8.8.8.8"
+echo -n "begin ping to 8.8.8.8:  "
 while [ $intertube -ne 1 ]; do
         line=$(ping -c 5  8.8.8.8  | tail -n 1)
        # ping -c 5 8.8.8.8
@@ -55,7 +55,7 @@ while [ $intertube -ne 1 ]; do
         fi
 done
 
-echo "Start traceroute to 8.8.8.8"
+echo -n "Start traceroute to 8.8.8.8:  "
 traceroute -n 8.8.8.8 >> $file
 line=$(traceroute -n 8.8.8.8 | tail -n 1)
 hop=$(echo $line | awk '{ print $1 }') 
@@ -69,7 +69,7 @@ echo "traceroute_FAILED: destiantion 8.8.8.8 not reach"
 echo "traceroute_FAILED" >> $file
 fi
 
-echo "Checking Mikrotik Router"
+echo -n "Checking Mikrotik Router:   "
 line=$(ssh -o StrictHostKeyChecking=accept-new -t admin@107.11.13.1 '/ip/dhcp-server/export; quit;' | grep  "$gw")
 echo $line
 line=$(echo $line | tee >(sed $'s/\033[[][^A-Za-z]*m//g'))
