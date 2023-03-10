@@ -68,7 +68,7 @@ echo "traceroute_FAILED: destination 8.8.8.8 not reach"
 echo "traceroute_FAILED" >> $file
 fi
 
-echo -n "Checking Mikrotik Router:   "
+echo "Checking Mikrotik Router:   "
 line=$(ssh -o StrictHostKeyChecking=accept-new -t admin@107.11.13.1 '/ip/dhcp-server/export; quit;' | grep  "$gw")
 echo $line
 line=$(echo $line | tee >(sed $'s/\033[[][^A-Za-z]*m//g'))
