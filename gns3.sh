@@ -63,8 +63,9 @@ echo $line >> $file
 # echo $line | tee >(sed $'s/\033[[][^A-Za-z]*m//g' >> $file)
 
 server="$ip"".0/24"
+echo $server
 line2=$(echo $line | grep "$server")
-
+echo $line2
 if [ -z "$line2" ]; then
 message="DHCP SERVER FAILED"
 echo $message
