@@ -70,8 +70,8 @@ fi
 
 echo -n "Checking Mikrotik Router:   "
 line=$(ssh -o StrictHostKeyChecking=accept-new -t admin@"$gw2" '/ip/dhcp-server/export; quit;' | grep  "$gw2")
-echo $line
-line=$(echo $line | tee >(sed $'s/\033[[][^A-Za-z]*m//g'))
+#echo $line
+#line=$(echo $line | tee >(sed $'s/\033[[][^A-Za-z]*m//g'))
 #echo $line
 #echo $line >> $file
 echo $line | tee >(sed $'s/\033[[][^A-Za-z]*m//g' >> $file)
