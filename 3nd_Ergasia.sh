@@ -11,7 +11,6 @@ echo -e $mitroo'\t'$ip'\t'$gw  > $file
 echo -n "Checking Gateway:  "
 gw2="$ip2"".1"
 #echo $gw2
-gw=105.34.34.1
 if [ $gw2 == $gw ]; then
                 message="GW_CORRECT"
                 echo $message
