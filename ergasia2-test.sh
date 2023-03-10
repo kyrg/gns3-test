@@ -9,7 +9,7 @@ file="$mitroo"".txt"
 echo -e $mitroo'\t'$ip'\t'$gw  > $file
 
 echo -n "Checking Gateway:  "
-#gw2="$ip2"".1"
+gw2="$ip2"".1"
 #echo $gw2
 gw=105.34.34.1
 if [ $gw2 == $gw ]; then
@@ -26,7 +26,7 @@ fi
 echo -n "begin ping to gateway:  "
 intertube=0
 while [ $intertube -ne 1 ]; do  
-        line=$(ping -c 5 $gw  | tail -n 1)
+        line=$(ping -c 5 $gw2  | tail -n 1)
         if [ $? -eq  0 ]; then
                 message="ping to GW_SUCCESS"
                 echo $message
