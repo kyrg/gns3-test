@@ -65,7 +65,7 @@ if [ $trace == "8.8.8.8"  ]; then
 echo "traceroute_SUCCESS: you reach 8.8.8.8 in $hop hops"
 echo "traceroute_SUCCESS" >> $file
 else
-echo "traceroute_FAILED: destiantion 8.8.8.8 not reach"
+echo "traceroute_FAILED: destination 8.8.8.8 not reach"
 echo "traceroute_FAILED" >> $file
 fi
 
