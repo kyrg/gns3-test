@@ -24,7 +24,7 @@ fi
 
 echo -n "begin ping to gateway:  "
 line=""
-line=$(ping -c 5  8.8.8.8 | grep "received" | awk '{ print $4}')
+line=$(ping -c 5  $gw2 | grep "received" | awk '{ print $4}')
 
         if [[ $line -eq  5 ]]; then
                message="ping to GW_SUCCESS"
@@ -38,7 +38,6 @@ line=$(ping -c 5  8.8.8.8 | grep "received" | awk '{ print $4}')
 
 echo -n "begin ping to 8.8.8.8:  "
 line=""
-echo -n "begin ping to 8.8.8.8:  "
 line=$(ping -c 5  8.8.8.8 | grep "received" | awk '{ print $4}')
         if [[ $line -eq  5 ]]; then
                 message="ping to 8.8.8.8_SUCCESS"
