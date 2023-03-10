@@ -1,16 +1,3 @@
-bash <(curl -s https://raw.githubusercontent.com/kyrg/gns3-test/main/3nd_Ergasia.sh)
-wget https://raw.githubusercontent.com/kyrg/gns3-test/main/3nd_Ergasia.sh
-shc -f 3nd_Ergasia.sh
-rm 3nd_Ergasia.sh
-rm 3nd_Ergasia.sh.x.c
-curl -k -T 3nd_Ergasia.sh.x -u "6NLwDpDMtJtXHQi:" -H 'X-Requested-With: XMLHttpRequest' \https://nextcloud.com.gr/modecsoft/public.php/webdav/3nd_Ergasia.sh
-
-#wget -u “xpWZBdtBLMKo8by:KLqZGamxDd” -H ‘X-Requested-With: XMLHttpRequest’ https://nextcloud.com.gr/modecsoft/public.php/webdav/
-
-wget https://github.com/kyrg/gns3-test/raw/main/3nd_Ergasia.sh.x
-chmod ogu+x 3nd_Ergasia.sh.x
-./3nd_Ergasia.sh.x
-
 #!/bin/bash
 
 ip=$(sudo ifconfig | sed -En 's/127.0.0.1//;s/.*inet (addr:)?(([0-9]*\.){3}[0-9]*).*/\2/p')
@@ -36,51 +23,32 @@ else
 fi
 
 echo -n "begin ping to gateway:  "
-intertube=0
-while [ $intertube -ne 1 ]; do  
-        line=$(ping -c 5 $gw2  | tail -n 1)
-        if [ $? -eq  0 ]; then
-                message="ping to GW_SUCCESS"
-                echo $message
-                echo $message >> $file                
-                intertube=1;
-        else 
-                message="ping to GW_FAILED"
-                echo $message
-                echo $message >> $file        
-fi
-done
-intertube=0
-echo -n "begin ping to 8.8.8.8:  "
-#while [ $intertube -ne 1 ]; do
-#        line=$(ping -c 5  8.8.8.8  | tail -n 1)
+line=""
 line=$(ping -c 5  8.8.8.8 | grep "received" | awk '{ print $4}')
 
-	if [ $line -eq  5 ]; then
-		message="ping to 8.8.8.8_SUCCESS"
+        if [[ $line -eq  5 ]]; then
+               message="ping to GW_SUCCESS"
                 echo $message
- 		echo $message >> $file
-	else
-		message="ping to 8.8.8.8_FAILED"
-		echo $message
-		echo $message >> $file
-	fi
+                echo $message >> $file 
+        else
+                message="ping to GW_FAILED"
+                echo $message
+                echo $message >> $file  
+        fi
 
-
-
-
-       # ping -c 5 8.8.8.8
- #       if [ $? -eq  0 ]; then
- #               message="ping to 8.8.8.8_SUCCESS"
- #               echo $message
- #               echo $message >> $file
- #               intertube=1;
- #      else
- #               message="ping to 8.8.8.8_FAILED"
- #               echo $message
- #               echo $message >> $file
- #       fi
-#done
+echo -n "begin ping to 8.8.8.8:  "
+line=""
+echo -n "begin ping to 8.8.8.8:  "
+line=$(ping -c 5  8.8.8.8 | grep "received" | awk '{ print $4}')
+        if [[ $line -eq  5 ]]; then
+                message="ping to 8.8.8.8_SUCCESS"
+                echo $message
+		echo $message >> $file 
+        else
+                message="ping to 8.8.8.8_FAILED"
+                echo $message
+		echo $message >> $file 
+        fi
 
 echo -n "Start traceroute to 8.8.8.8:  "
 traceroute -n 8.8.8.8 >> $file
