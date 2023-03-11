@@ -61,9 +61,9 @@ line=""
 #vpcs="$ip2"".""254"
 
 echo -n "Enter VPCS IP address to ping (px 106.45.45.254): "
-read line
+read -p line
 vpcs=$line
-echo -n "You entered: $vpcs"
+echo -n "You entered: $vpcs   "
 
 line=$(ping -c 5  "$vpcs" | grep "received" | awk '{ print $4}')
         if [[ $line -eq  5 ]]; then
@@ -143,7 +143,7 @@ echo $message>> $file
 fi
 
 echo -n "Submit result: y/n ?"
-read line
+read -p line
         if [[ $line ==  "y" ]]; then
                message="entered yes. uploading results.. "
 		curl -k -T $file -u "6NLwDpDMtJtXHQi:" -H 'X-Requested-With: XMLHttpRequest' \https://nextcloud.com.gr/modecsoft/public.php/webdav/$file
