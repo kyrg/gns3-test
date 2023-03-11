@@ -60,14 +60,16 @@ line=$(ping -c 5  $gw3 | grep "received" | awk '{ print $4}')
 echo -n "begin ping to VPCS :  "
 line=""
 vpcs="$gw2"".""254"
-line=$(ping -c 5  $vpcs | grep "received" | awk '{ print $4}')
+echo $vpcs
+
+line=$(ping -c 5  "$vpcs" | grep "received" | awk '{ print $4}')
 
         if [[ $line -eq  5 ]]; then
-               message="ping to GW_SUCCESS_2"
+               message="ping to VPCS_SUCCESS"
                 echo $message
                 echo $message >> $file 
         else
-                message="ping to GW_FAILED_2"
+                message="ping to VPCS_FAIL"
                 echo $message
                 echo $message >> $file  
         fi
