@@ -9,18 +9,17 @@ ip4=$(echo $ip | cut -d '.' -f3)
 ip5=$((ip4-1))
 ip2="$ip3"".""$ip5"
 ip6="$ip3"".""$ip4"
-echo $ip2
-echo $ip6
+gw2="$ip2"".1"
+gw3="$ip6"".1"
 
 mitroo=$(echo "${ip2//.}")
 file="$mitroo"".txt"
 echo -e $mitroo'\t'$ip'\t'$gw  > $file
 
 echo -n "Checking Gateway:  "
-gw2="$ip2"".1"
-gw3="$ip6"".1"
-#echo $gw2
-if [ $gw2 == $gw ]; then
+
+
+if [ $gw3 == $gw ]; then
                 message="GW_CORRECT"
                 echo $message
                 echo $message >> $file
@@ -58,6 +57,20 @@ line=$(ping -c 5  $gw3 | grep "received" | awk '{ print $4}')
                 echo $message >> $file  
         fi
 	
+echo -n "begin ping to VPCS :  "
+line=""
+vpcs="$gw2"".""254"
+line=$(ping -c 5  $vpcs | grep "received" | awk '{ print $4}')
+
+        if [[ $line -eq  5 ]]; then
+               message="ping to GW_SUCCESS_2"
+                echo $message
+                echo $message >> $file 
+        else
+                message="ping to GW_FAILED_2"
+                echo $message
+                echo $message >> $file  
+        fi
 	
 	
 	
@@ -112,7 +125,7 @@ echo $message>> $file
 fi
 
 
-gw3="$ip6"".1"
+
 line=$(ssh -o StrictHostKeyChecking=accept-new -t admin@"$gw2" '/ip/dhcp-server/export; delay 1; quit;' | grep  "$gw3")
 echo $line | tee >(sed $'s/\033[[][^A-Za-z]*m//g' >> $file)
 line2=$(echo $line | grep "$server")
