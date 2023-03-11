@@ -108,11 +108,11 @@ echo $line | tee >(sed $'s/\033[[][^A-Za-z]*m//g' >> $file)
 line2=$(echo $line | grep "$server")
 #echo $line2
 if [ -z "$line2" ]; then
-message="DHCP_SERVER_FAILED_1"
+message="DHCP_SERVER_FAILED_2"
 echo $message
 echo $message>> $file
 else
-message="DHCP_SERVER_SUCCESS_1"
+message="DHCP_SERVER_SUCCESS_2"
 echo $message
 echo $message>> $file
 fi
