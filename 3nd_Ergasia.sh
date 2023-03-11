@@ -59,7 +59,7 @@ line=$(ping -c 5  $gw3 | grep "received" | awk '{ print $4}')
 	
 echo -n "begin ping to VPCS :  "
 line=""
-vpcs="$gw2"".""254"
+vpcs="$ip2"".""254"
 echo $vpcs
 
 line=$(ping -c 5  "$vpcs" | grep "received" | awk '{ print $4}')
