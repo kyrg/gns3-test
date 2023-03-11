@@ -9,7 +9,7 @@ ip4=$(echo $ip | cut -d '.' -f3)
 ip4=$((ip4-1))
 echo $ip3
 echo $ip4
-ip2="$ip2""ip3"
+ip2="$ip3""ip4"
 
 mitroo=$(echo "${ip2//.}")
 file="$mitroo"".txt"
@@ -83,16 +83,41 @@ echo $line | tee >(sed $'s/\033[[][^A-Za-z]*m//g' >> $file)
 line2=$(echo $line | grep "$server")
 #echo $line2
 if [ -z "$line2" ]; then
-message="DHCP_SERVER_FAILED"
+message="DHCP_SERVER_FAILED_1"
 echo $message
 echo $message>> $file
 else
-message="DHCP_SERVER_SUCCESS"
+message="DHCP_SERVER_SUCCESS_1"
 echo $message
 echo $message>> $file
-
-
 fi
+
+ip4=$((ip4+1))
+ip2="$ip3""ip4"
+gw2="$ip2"".1"
+echo $gw2
+line=$(ssh -o StrictHostKeyChecking=accept-new -t admin@"$gw2" '/ip/dhcp-server/export; delay 1; quit;' | grep  "$gw2")
+#echo $line
+#line=$(echo $line | tee >(sed $'s/\033[[][^A-Za-z]*m//g'))
+#echo $line
+#echo $line >> $file
+echo $line | tee >(sed $'s/\033[[][^A-Za-z]*m//g' >> $file)
+
+#server="$ip2"".0/24"
+#echo $server
+line2=$(echo $line | grep "$server")
+#echo $line2
+if [ -z "$line2" ]; then
+message="DHCP_SERVER_FAILED_1"
+echo $message
+echo $message>> $file
+else
+message="DHCP_SERVER_SUCCESS_1"
+echo $message
+echo $message>> $file
+fi
+
+
 
 #ssh -o StrictHostKeyChecking=accept-new -t admin@"$gw2" '/ip/dhcp-server/export; delay 1; /ip/address/print; delay 1; /ip/route/print; delay 1; /ip/dhcp-client/print; delay 1; quit' | tee >(sed $'s/\033[[][^A-Za-z]*m//g' >> $file) 2>&1 
 echo "continue"
