@@ -56,12 +56,14 @@ line=$(ping -c 5  $gw3 | grep "received" | awk '{ print $4}')
                 echo $message
                 echo $message >> $file  
         fi
-echo -n "begin ping to VPCS :  "
-line=""
-vpcs="$ip2"".""254"
 
+line=""	
+#vpcs="$ip2"".""254"
+
+echo -n "Enter VPCS IP address to ping (px 106.45.45.254): "
+read line
+vpcs=$line
 line=$(ping -c 5  "$vpcs" | grep "received" | awk '{ print $4}')
-
         if [[ $line -eq  5 ]]; then
                message="ping to VPCS_SUCCESS"
                 echo $message
@@ -71,10 +73,8 @@ line=$(ping -c 5  "$vpcs" | grep "received" | awk '{ print $4}')
                 echo $message
                 echo $message >> $file  
         fi
-	
-	
-	
-	
+
+
 echo -n "begin ping to 8.8.8.8:  "
 line=""
 line=$(ping -c 5  8.8.8.8 | grep "received" | awk '{ print $4}')
