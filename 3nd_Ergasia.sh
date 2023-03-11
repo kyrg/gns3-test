@@ -56,26 +56,6 @@ line=$(ping -c 5  $gw3 | grep "received" | awk '{ print $4}')
                 echo $message
                 echo $message >> $file  
         fi
-echo -n "Scanning for VPCS..."	
-
-for i in {2..254}
-do
-vpcs="$ip2"".""$i"
-line=$(ping -c 1  "$vpcs" | grep "received" | awk '{ print $4}')
-
-        if [[ $line -eq  1 ]]; then
-               message="VPCS_found:"$vpcs""
-                echo $message
-                echo $message >> $file 
-        else
-               message="VPCS_NOT_found""
-                echo $message
-                echo $message >> $file  
-        fi
-
-done
-
-
 echo -n "begin ping to VPCS :  "
 line=""
 vpcs="$ip2"".""254"
