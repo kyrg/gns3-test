@@ -6,10 +6,11 @@ echo "your ip address: $ip and your gateway: $gw"
 
 ip3=$(echo $ip | cut -d '.' -f1-2)
 ip4=$(echo $ip | cut -d '.' -f3)
-ip4=$((ip4-1))
-echo $ip3
-echo $ip4
-ip2="$ip3""$ip4"
+ip5=$((ip4-1))
+ip2="$ip3"".""$ip5"
+ip6="$ip3"".""$ip4"
+echo $ip2
+echo $ip6
 
 mitroo=$(echo "${ip2//.}")
 file="$mitroo"".txt"
@@ -17,6 +18,7 @@ echo -e $mitroo'\t'$ip'\t'$gw  > $file
 
 echo -n "Checking Gateway:  "
 gw2="$ip2"".1"
+gw3="$ip6"".1"
 #echo $gw2
 if [ $gw2 == $gw ]; then
                 message="GW_CORRECT"
@@ -29,20 +31,37 @@ else
 
 fi
 
-echo -n "begin ping to gateway:  "
+echo -n "begin ping to gateway 1:  "
 line=""
 line=$(ping -c 5  $gw2 | grep "received" | awk '{ print $4}')
 
         if [[ $line -eq  5 ]]; then
-               message="ping to GW_SUCCESS"
+               message="ping to GW_SUCCESS_1"
                 echo $message
                 echo $message >> $file 
         else
-                message="ping to GW_FAILED"
+                message="ping to GW_FAILED_1"
                 echo $message
                 echo $message >> $file  
         fi
+echo -n "begin ping to gateway 2:  "
+line=""
+line=$(ping -c 5  $gw3 | grep "received" | awk '{ print $4}')
 
+        if [[ $line -eq  5 ]]; then
+               message="ping to GW_SUCCESS_2"
+                echo $message
+                echo $message >> $file 
+        else
+                message="ping to GW_FAILED_2"
+                echo $message
+                echo $message >> $file  
+        fi
+	
+	
+	
+	
+	
 echo -n "begin ping to 8.8.8.8:  "
 line=""
 line=$(ping -c 5  8.8.8.8 | grep "received" | awk '{ print $4}')
