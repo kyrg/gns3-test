@@ -9,7 +9,7 @@ ip4=$(echo $ip | cut -d '.' -f3)
 ip4=$((ip4-1))
 echo $ip3
 echo $ip4
-ip2="$ip3""ip4"
+ip2="$ip3""$ip4"
 
 mitroo=$(echo "${ip2//.}")
 file="$mitroo"".txt"
@@ -93,7 +93,7 @@ echo $message>> $file
 fi
 
 ip4=$((ip4+1))
-ip2="$ip3""ip4"
+ip2="$ip3""$ip4"
 gw2="$ip2"".1"
 echo $gw2
 line=$(ssh -o StrictHostKeyChecking=accept-new -t admin@"$gw2" '/ip/dhcp-server/export; delay 1; quit;' | grep  "$gw2")
