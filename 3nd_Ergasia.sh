@@ -76,7 +76,7 @@ line=$(ping -c 5  8.8.8.8 | grep "received" | awk '{ print $4}')
         fi
 
 echo -n "Start traceroute to 8.8.8.8:  "
-traceroute -n -I 8.8.8.8 >> $file
+sudo traceroute -n -I 8.8.8.8 >> $file
 line=$(traceroute -n 8.8.8.8 | tail -n 1)
 hop=$(echo $line | awk '{ print $1 }') 
 trace=$(echo $line | awk '{ print $2 }') 
@@ -111,21 +111,12 @@ echo $message
 echo $message>> $file
 fi
 
-ip4=$((ip4+1))
-ip2="$ip3""$ip4"
-gw2="$ip2"".1"
-echo $gw2
-line=$(ssh -o StrictHostKeyChecking=accept-new -t admin@"$gw2" '/ip/dhcp-server/export; delay 1; quit;' | grep  "$gw2")
-#echo $line
-#line=$(echo $line | tee >(sed $'s/\033[[][^A-Za-z]*m//g'))
-#echo $line
-#echo $line >> $file
-echo $line | tee >(sed $'s/\033[[][^A-Za-z]*m//g' >> $file)
 
-#server="$ip2"".0/24"
-#echo $server
+gw3="$ip6"".1"
+line=$(ssh -o StrictHostKeyChecking=accept-new -t admin@"$gw2" '/ip/dhcp-server/export; delay 1; quit;' | grep  "$gw3")
+echo $line | tee >(sed $'s/\033[[][^A-Za-z]*m//g' >> $file)
 line2=$(echo $line | grep "$server")
-#echo $line2
+
 if [ -z "$line2" ]; then
 message="DHCP_SERVER_FAILED_2"
 echo $message
