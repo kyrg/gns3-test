@@ -6,7 +6,7 @@ echo "your ip address: $ip and your gateway: $gw"
 
 ip3=$(echo $ip | cut -d '.' -f1-2)
 ip4=$(echo $ip | cut -d '.' -f3)
-ip4=$ip4-1
+ip4=$((ip4-1))
 echo $ip3
 echo $ip4
 ip2="$ip2""ip3"
@@ -57,7 +57,7 @@ line=$(ping -c 5  8.8.8.8 | grep "received" | awk '{ print $4}')
         fi
 
 echo -n "Start traceroute to 8.8.8.8:  "
-traceroute -n 8.8.8.8 >> $file
+traceroute -n -I 8.8.8.8 >> $file
 line=$(traceroute -n 8.8.8.8 | tail -n 1)
 hop=$(echo $line | awk '{ print $1 }') 
 trace=$(echo $line | awk '{ print $2 }') 
