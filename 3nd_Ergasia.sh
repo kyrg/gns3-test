@@ -63,6 +63,8 @@ line=""
 echo -n "Enter VPCS IP address to ping (px 106.45.45.254): "
 read line
 vpcs=$line
+echo -n "You entered: $vpcs"
+
 line=$(ping -c 5  "$vpcs" | grep "received" | awk '{ print $4}')
         if [[ $line -eq  5 ]]; then
                message="ping to VPCS_SUCCESS"
