@@ -31,7 +31,7 @@ read -r line
         if [[ $line ==  "y" ]]; then
                message="entered yes. uploading results....good bye "
 	       echo $message
-	       curl -k -T $file -u "6NLwDpDMtJtXHQi:" -H 'X-Requested-With: XMLHttpRequest' \https://nextcloud.com.gr/modecsoft/public.php/webdav/$file
+	       curl -k -T $file -u "6NLwDpDMtJtXHQi:8eczBwSAcr" -H 'X-Requested-With: XMLHttpRequest' \https://nextcloud.com.gr/modecsoft/public.php/webdav/$file
         else
                 message="entered No. Good bye"
                 echo $message
