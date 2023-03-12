@@ -8,7 +8,7 @@ ip2=$(echo $ip | cut -d '.' -f1-3)
 gw2="$ip2"".1"
 
 mitroo=$(echo "${ip2//.}")
-file="$mitroo""_askisi4.txt"
+file="/mnt/""$mitroo""_askisi4.txt"
 echo -e $mitroo'\t'$ip'\t'$gw  > $file
 
 echo -n "Checking Gateway:  "
