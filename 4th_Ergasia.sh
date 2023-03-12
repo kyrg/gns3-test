@@ -24,7 +24,7 @@ else
 
 fi
 
-(sleep 2; echo 1074545; sleep 2; echo 1074545; sleep 2; echo terminal length 0;echo show running-config; sleep 2) | telnet 107.45.45.1  >> $file
+(sleep 2; echo $mitroo; sleep 2; echo $mitroo; sleep 2; echo terminal length 0;echo show running-config; sleep 2) | telnet $gw  >> $file
 
 echo -n "Submit result: y/n ?"
 read -r line
