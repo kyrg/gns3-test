@@ -1,17 +1,3 @@
-bash <(curl -s https://raw.githubusercontent.com/kyrg/gns3-test/main/3nd_Ergasia.sh)
-wget https://raw.githubusercontent.com/kyrg/gns3-test/main/3nd_Ergasia.sh
-shc -f 3nd_Ergasia.sh
-rm 3nd_Ergasia.sh
-rm 3nd_Ergasia.sh.x.c
-curl -k -T 3nd_Ergasia.sh.x -u "6NLwDpDMtJtXHQi:" -H 'X-Requested-With: XMLHttpRequest' https://nextcloud.com.gr/modecsoft/public.php/webdav/3nd_Ergasia.sh.x
-
-#wget -u “xpWZBdtBLMKo8by:KLqZGamxDd” -H ‘X-Requested-With: XMLHttpRequest’ https://nextcloud.com.gr/modecsoft/public.php/webdav/
-
-wget https://github.com/kyrg/gns3-test/raw/main/3nd_Ergasia.sh.x
-chmod ogu+x 3nd_Ergasia.sh.x
-./3nd_Ergasia.sh.x
-
-
 #!/bin/bash
 
 ip=$(sudo ifconfig | sed -En 's/127.0.0.1//;s/.*inet (addr:)?(([0-9]*\.){3}[0-9]*).*/\2/p')
