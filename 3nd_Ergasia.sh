@@ -131,18 +131,11 @@ fi
 
 echo -n "Checking Mikrotik Router:   "
 line=$(ssh -o StrictHostKeyChecking=accept-new -t admin@"$gw2" '/ip/dhcp-server/export; delay 1; quit;' | grep  "gateway")
-echo -n "1: " 
-echo "$line" | tee >(sed $'s/\033[[][^A-Za-z]*m//g')
-echo -n "2: " 
-echo $(echo "$line"| tee >(sed $'s/\033[[][^A-Za-z]*m//g')
-echo $(echo "$line"| tee >(sed $'s/\033[[][^A-Za-z]*m//g') >> $file)
-
-
+line=$(echo "$line" | sed $'s/\033[[][^A-Za-z]*m//g')
+echo "$line" >> $file
 
 server="$ip2"".0/24"
-#echo $server
 line2=$(echo "$line" | grep "$server" | grep "$gw2")
-echo "$line2"
 if [ -z "$line2" ]; then
 message="DHCP_SERVER_FAILED_2"
 echo $message
@@ -155,9 +148,7 @@ fi
 
 
 server="$ip6"".0/24"
-#echo $server 
 line2=$(echo "$line" | grep "$server" | grep "$gw3")
-echo "$line2"
 
 if [ -z "$line2" ]; then
 message="DHCP_SERVER_FAILED_2"
