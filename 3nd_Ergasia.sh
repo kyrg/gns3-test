@@ -133,7 +133,9 @@ echo -n "Checking Mikrotik Router:   "
 line=$(ssh -o StrictHostKeyChecking=accept-new -t admin@"$gw2" '/ip/dhcp-server/export; delay 1; quit;' | grep  "gateway")
 
 line=$(echo "$line" | tee >(sed $'s/\033[[][^A-Za-z]*m//g'))
-echo "$line" | tee >(sed $'s/\033[[][^A-Za-z]*m//g') >> $file
+echo "$line" >> $file
+
+
 
 server="$ip2"".0/24"
 #echo $server
