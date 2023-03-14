@@ -137,11 +137,11 @@ echo "$line" >> $file
 server="$ip2"".0/24"
 line2=$(echo "$line" | grep "$server" | grep "$gw2")
 if [ -z "$line2" ]; then
-message="DHCP_SERVER_FAILED_2"
+message="DHCP_SERVER_FAILED_1"
 echo $message
 echo $message>> $file
 else
-message="DHCP_SERVER_SUCCESS_2"
+message="DHCP_SERVER_SUCCESS_1"
 echo $message
 echo $message>> $file
 fi
