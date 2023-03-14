@@ -134,7 +134,7 @@ line=$(ssh -o StrictHostKeyChecking=accept-new -t admin@"$gw2" '/ip/dhcp-server/
 echo -n "1: " 
 echo $line
 
-line3e=$(echo "$line" | tee >(sed $'s/\033[[][^A-Za-z]*m//g'))
+line3=$(echo "$line" | tee >(sed $'s/\033[[][^A-Za-z]*m//g'))
 echo -n "2: " 
 echo $line3
 echo "$line" | tee >(sed $'s/\033[[][^A-Za-z]*m//g') >> $file
