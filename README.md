@@ -7,8 +7,8 @@ Sample Lab Project-Script below. Script runs at debian terminal and performs the
 	scan network topology, 
 	ospf confgiration, 
 	router username/password setup, 
-	NAT/dhcp implementation.
-	connection to external internet
-	upload results to my private cloud storage.
+	NAT/dhcp implementation,
+	connection to external internet,
+	upload results to cloud storage.
 ![image](https://user-images.githubusercontent.com/8039079/225251989-84764e17-d1d8-4e0d-a36a-37a1a49f7a0b.png)
 
