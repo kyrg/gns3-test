@@ -1,7 +1,7 @@
 # gns3-test
 gns3-testing
 This is a set of compiled bash scripts that students execute in their gns3-projects, part of their obligation for the course "Computer Networks Laboratory" 
-that I teach at Computert Engineering and Infornatucs DEpt, @University of Patras, Greece.
+that I teach at Computer Engineering and Infornatucs Dept, @University of Patras, Greece (www.ceid.upatras.gr).
 
 Sample Lab Project shown below. Script runs at debian terminal and performs the following tests:
 	scan network topology, 
