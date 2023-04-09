@@ -17,4 +17,5 @@ Sample Lab Project shown below. Script runs at debian terminal and performs the 
 
 
 Scripts are available upon request: kvlachos@ceid.upatras.gr
-
+Debian GNS3 appliance fully updated and with telnet, gcc pre installed:
+https://nextcloud.com.gr/modecsoft/index.php/s/H2kcTZpBMMRjirY
