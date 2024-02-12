@@ -7,7 +7,7 @@ that I teach at Computer Engineering and Informatics Dept, @University of Patras
 
 Sample Lab Project shown below. Script runs at debian terminal and performs the following:
 	scans network topology, 
-	tests ospf confgiration, 
+	tests ospf configuration, 
 	tests Router username/password setup, 
 	NAT/dhcp implementation,
 	connection to external internet,
