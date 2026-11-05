@@ -17,11 +17,6 @@ if [ -z "$STUDENT_NAME" ] || [ -z "$STUDENT_AM" ] || [ -z "$STUDENT_EMAIL" ]; th
     exit 1
 fi
 
-# Έλεγχος δικαιωμάτων root
-if [ "$EUID" -ne 0 ]; then
-    echo "Παρακαλώ εκτελέστε το script με δικαιώματα root (sudo)."
-    exit 1
-fi
 
 # Χρώματα για την έξοδο στο τερματικό
 GREEN='\033[0;32m'
